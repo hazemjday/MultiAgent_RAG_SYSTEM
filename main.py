@@ -1,17 +1,17 @@
 from RetrievalAgent import WikipediaRetriever
 from CorrectionAgent import Correction
-import re
 from EmbeddingAgent import Embedding
-from langchain_community.vectorstores import FAISS
-from sentence_transformers import SentenceTransformer
-import torch
+from AnswerAgent import Answer
 import faiss
+import pickle
+from sentence_transformers import SentenceTransformer
 from sklearn.preprocessing import normalize
 import numpy as np
-import pickle
+import torch
 
 
-user_query = "messi"
+
+user_query = "elon musk"
 correction_agent = Correction()
 corrected_query = correction_agent.run(user_query)
 if corrected_query is None:
@@ -30,3 +30,11 @@ else:
 splitter_agent = Embedding()
 safe_query = splitter_agent.embed_and_index(result["raw_text"], corrected_query)
 print(safe_query)
+
+agent = Answer()
+
+question = "does musk bought twitter"
+answers = agent.answer_question(question, safe_query)
+print(f"\nQuestion : {question}\nRéponses probables :")
+for ans in answers:
+    print("→", ans)

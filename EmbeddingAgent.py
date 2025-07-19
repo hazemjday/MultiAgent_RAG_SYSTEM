@@ -42,8 +42,8 @@ class Embedding:
     def embed_and_index(self, raw_text: str, corrected_query: str) -> str:
         device = 'cuda' if torch.cuda.is_available() else 'cpu'
         print(f"Utilisation du device : {device}")
-        model = SentenceTransformer('all-MiniLM-L6-v2').to(device)
-        dimension = 384
+        model = SentenceTransformer('sentence-transformers/all-mpnet-base-v2').to(device)
+        dimension = 768
         index = faiss.IndexFlatIP(dimension)
         texts = []
         sections = self.split_into_sections(raw_text)
