@@ -3,23 +3,26 @@ mon projet est par exemple dire aujiurdhui on va parle de
  embeddingds puis il repond a dautre questions avec
  donnee existants 
 
+                     --Done--
+
 1  Agent coorrection de questions par LLM
 Reçoit la requête utilisateur "Aujourd'hui on parle 
 d'Elon Musk"
 Il décide : De quel sujet il s’agit 
 
 
+                     --Done--
+
 2. Agent de Recherche de Connaissances (Retriever)
-chercher l'information brute Wikipedia: done
+chercher l'information brute Wikipedia
+
 
 3. Agent d’Indexation / Embedding
 Prend le texte brut et le transforme en embeddings
 Indexe les paragraphes dans FAISS (ou autre moteur 
 vectoriel)
 
-4. Agent de Mémoire / Knowledge Base
-Gère les données embarquées 
-Fait l’interfaçage avec FAISS ou Chroma
+
 
 
 5. Agent Questionneur / Q&A

@@ -1,7 +1,7 @@
 import re
 from langchain_ollama import OllamaLLM
 
-class CorrectionAgent:
+class Correction:
     def __init__(self, model="mistral:7b", temperature=0):
         # Initialisation du modèle Ollama
         self.llm = OllamaLLM(model=model, temperature=temperature)
