@@ -1,7 +1,7 @@
 import wikipediaapi
 
 class WikipediaRetriever:
-    def __init__(self, lang='fr', user_agent='MonProjetRAG/1.0 (contact@example.com)'):
+    def __init__(self, lang='en', user_agent='MonProjetRAG/1.0 (contact@example.com)'):
         self.wiki = wikipediaapi.Wikipedia(
             language=lang,
             extract_format=wikipediaapi.ExtractFormat.WIKI,

@@ -3,7 +3,6 @@ from langchain_ollama import OllamaLLM
 
 class Correction:
     def __init__(self, model="mistral:7b", temperature=0):
-        # Initialisation du modèle Ollama
         self.llm = OllamaLLM(model=model, temperature=temperature)
 
     def extract_between_quotes(self, text):

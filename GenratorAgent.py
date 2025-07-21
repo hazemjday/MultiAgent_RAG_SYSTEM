@@ -6,6 +6,7 @@ import numpy as np
 from typing import Dict
 from fpdf import FPDF
 from transformers import pipeline
+import torch
 
 class Generator:
     def __init__(self, min_length=50):
@@ -59,16 +60,25 @@ class Generator:
             pdf.set_text_color(0, 0, 255)  # 🔵 Bleu pour la clé
             pdf.cell(0, 10, f"{key}:", ln=1)
             pdf.set_text_color(0, 0, 0)    # ⚫ Noir pour la valeur
-            resume_value = summarizer(value, min_length=20, do_sample=False)
-            pdf.multi_cell(0, 10, resume_value[0]["summary_text"])
+            sentences = [s.strip() for s in value.split('.') if s.strip()]
+            current_chunk = ""
+            results = []
+            for sentence in sentences:
+                if len(current_chunk.split()) + len(sentence.split()) < 500:
+                   current_chunk += sentence + ". "
+                else:
+                   print(len(current_chunk.split()))
+                   summary = summarizer(current_chunk.strip(), max_length=150, min_length=10, do_sample=False)
+                   results.append(summary[0]['summary_text'])
+                   current_chunk = sentence + ". "
+            if current_chunk:
+                summary = summarizer(current_chunk.strip(), max_length=150, min_length=10, do_sample=False)
+                results.append(summary[0]['summary_text'])
+            text = " ".join(results) 
+            pdf.multi_cell(0, 10, text)         
             pdf.ln(5)
+
         filename = f"rapport_{safe_query}.pdf"
         # Sauvegarde du PDF
         pdf.output(filename)
         return f"Résumé sauvegardé dans {filename}"
-
-
-
-
-
-

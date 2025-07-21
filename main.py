@@ -6,7 +6,7 @@ from GenratorAgent import Generator
 import sys
 
 #n'oublier pas la condition en cas topic nest pas mis
-user_query = " elon musk"
+user_query = "elon musk"
 correction_agent = Correction()
 corrected_query = correction_agent.run(user_query)
 if corrected_query is None:
